@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseXPTransfer : MonoBehaviour
+public abstract class BaseXPTransfer : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int CurrentXP { get; protected set; } = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int CurrentLevel { get; protected set; } = 1;
+
+    public int XPRequiredForNextLevel => GetXPRequiredForNextLevel();
+
+    public bool AtLevelCap { get; protected set; } = false;
+
+    public abstract bool AddXP(int amount);
+    public abstract void SetLevel(int level);
+
+    protected abstract int GetXPRequiredForNextLevel();
 }
